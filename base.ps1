@@ -126,6 +126,9 @@ Install-Module -Name Azure -Scope AllUsers -AllowClobber
 # Runtime Environments & SDKs
 #############################
 
+# Ghostscript
+cup ghostscript --cacheLocation $ChocoCachePath
+
 #Install Go
 cup golang --cacheLocation $ChocoCachePath
 
@@ -146,6 +149,7 @@ cinst --cachelocation $ChocoCachePath  vscode
 choco pin add -n=vscode
 refreshenv
 code --install-extension apollographql.vscode-apollo
+code --install-extension k--kato.docomment
 code --install-extension ms-dotnettools.csharp
 code --install-extension jchannon.csharpextensions
 code --install-extension ms-azuretools.vscode-docker
