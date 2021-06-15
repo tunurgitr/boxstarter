@@ -36,11 +36,28 @@ Set-ItemProperty -Path HKLM:\Software\Microsoft\PolicyManager\default\WiFi\Allow
 Set-ItemProperty -Path HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots -Name value -Type DWord -Value 0
 
 # Start Menu: Disable Bing Search Results
-Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name BingSearchEnabled -Type DWord -Value 0
+
+New-Item -Path 'HKLM:\SOFTWARE\Microsoft\Windows Search' -Name 'Windows Search' -ItemType Key
+New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name AllowCortana -Type DWORD -Value 0
+New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name BingSearchEnabled -Type DWORD -Value 0
+New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name ConnectedSearchUseWeb -Type DWORD -Value 0
+New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name DisableWebSearch -Type DWORD -Value 1
 
 # Start Menu: Disable Cortana 
 New-Item -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows' -Name 'Windows Search' -ItemType Key
 New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name AllowCortana -Type DWORD -Value 0
+
+# Disable the Lock Screen (the one before password prompt - to prevent dropping the first character)
+If (-Not (Test-Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization)) {
+	New-Item -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows -Name Personalization | Out-Null
+}
+Set-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization -Name NoLockScreen -Type DWord -Value 1
+
+
+# Disable Xbox Gamebar
+Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" -Name AppCaptureEnabled -Type DWord -Value 0
+Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name GameDVR_Enabled -Type DWord -Value 0
+
 
 Disable-BingSearch
 Disable-GameBarTips
@@ -118,21 +135,29 @@ cinst microsoft-teams
 # Databases
 cinst sql-server-express
 cinst sql-server-management-studio
-choco install microsoftazurestorageexplorer
-choco install azure-data-studio
-choco install azure-data-studio-sql-server-admin-pack
+cinst microsoftazurestorageexplorer
+cinst azure-data-studio
+cinst azure-data-studio-sql-server-admin-pack
 cinst sqlsearch  # << package maybe not working
 
-choco install visualstudio2019professional
-choco install visualstudio2019-workload-manageddesktop
-choco install visualstudio2019-workload-netcoretools 
-choco install visualstudio2019-workload-netweb 
-choco install visualstudio2019-workload-databuildtools
-choco install visualstudio2019-workload-nodebuildtools
-choco install visualstudio2019-workload-node
-choco install visualstudio2019-workload-datascience
-choco install visualstudio2019-workload-universalbuildtools
+cinst visualstudio2019professional
+cinst visualstudio2019-workload-manageddesktop
+cinst visualstudio2019-workload-netcoretools 
+cinst visualstudio2019-workload-netweb 
+cinst visualstudio2019-workload-databuildtools
+cinst visualstudio2019-workload-nodebuildtools
+cinst visualstudio2019-workload-node
+cinst visualstudio2019-workload-datascience
+cinst visualstudio2019-workload-universalbuildtools
 
 
 # docker
-choco install -y docker-for-windows
+cinst -y docker-for-windows
+
+# remove bad stuff
+
+# Bing Weather, News, Sports, and Finance (Money):
+Get-AppxPackage Microsoft.BingFinance | Remove-AppxPackage
+Get-AppxPackage Microsoft.BingNews | Remove-AppxPackage
+Get-AppxPackage Microsoft.BingSports | Remove-AppxPackage
+Get-AppxPackage Microsoft.BingWeather | Remove-AppxPackage
