@@ -67,7 +67,7 @@ Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name GameDVR_Enabled -Typ
 Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds' -Name ShellFeedsTaskbarViewMode -Type DWORD -Value 2
 
 # Disable search toolbar
-Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search' -Name SearchTaskbarMode -Type DWORD -Value 0
+Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search' -Name SearchboxTaskbarMode -Type DWORD -Value 0
 
 
 # Turn off People in Taskbar
