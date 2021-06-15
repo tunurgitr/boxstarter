@@ -137,9 +137,6 @@ cup -y --cacheLocation $ChocoCachePath golang
 # Install Java Runtime
 cup -y --cacheLocation $ChocoCachePath javaruntime
 
-# Install JDK 8
-cup -y --cacheLocation $ChocoCachePath jdk8
-
 # Install Python 2/3
 cup -y --cacheLocation $ChocoCachePath python2
 cup -y --cacheLocation $ChocoCachePath python3
