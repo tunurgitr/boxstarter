@@ -120,8 +120,8 @@ cup -y --cacheLocation $ChocoCachePath openssl.light
 ##############
 
 # Installing Azure PowerShell modules
-Install-Module -Name AzureRM -Scope AllUsers -Repository PSGallery -Force
-Install-Module -Name Azure -Scope AllUsers -Repository PSGallery -Force -AllowClobber
+Install-Module -Name AzureRM -Scope AllUsers -Repository PSGallery
+Install-Module -Name Azure -Scope AllUsers -Repository PSGallery -AllowClobber
 
 
 #############################
