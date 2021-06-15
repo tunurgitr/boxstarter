@@ -7,6 +7,8 @@ $Boxstarter.AutoLogin=$true
 $ChocoCachePath = "c:\temp"
 New-Item -Path $ChocoCachePath -ItemType directory -Force
 
+Set-PSRepository 
+
 Update-ExecutionPolicy Unrestricted
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableOpenFileExplorerToQuickAccess -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
 if (Test-PendingReboot) { Invoke-Reboot }
@@ -79,47 +81,47 @@ Disable-BingSearch
 Disable-GameBarTips
 
 # Browsers
-cinst --cachelocation $ChocoCachePath googlechrome
-cinst --cachelocation $ChocoCachePath  firefox
+cup -y --cachelocation $ChocoCachePath googlechrome
+cup -y --cachelocation $ChocoCachePath  firefox
 
 # Runtimes and SDKs
-cinst --cachelocation $ChocoCachePath  dotnet
-cinst --cachelocation $ChocoCachePath  dotnet-sdk
-cinst --cachelocation $ChocoCachePath  dotnetcore-3.1-runtime
-cinst --cachelocation $ChocoCachePath  dotnetcore-3.1-sdk
-cinst --cachelocation $ChocoCachePath  dotnetcore-2.1-runtime
-cinst --cachelocation $ChocoCachePath  dotnetcore-2.1-sdk
+cup -y --cachelocation $ChocoCachePath  dotnet
+cup -y --cachelocation $ChocoCachePath  dotnet-sdk
+cup -y --cachelocation $ChocoCachePath  dotnetcore-3.1-runtime
+cup -y --cachelocation $ChocoCachePath  dotnetcore-3.1-sdk
+cup -y --cachelocation $ChocoCachePath  dotnetcore-2.1-runtime
+cup -y --cachelocation $ChocoCachePath  dotnetcore-2.1-sdk
 
 # Utils
-cinst --cachelocation $ChocoCachePath  7zip
-cinst --cachelocation $ChocoCachePath  greenshot
-cinst --cachelocation $ChocoCachePath  chocolateygui
+cup -y --cachelocation $ChocoCachePath  7zip
+cup -y --cachelocation $ChocoCachePath  greenshot
+cup -y --cachelocation $ChocoCachePath  chocolateygui
 # cinst keepass.install
 
 # Dev tools
-cinst --cachelocation $ChocoCachePath  git
-cinst --cachelocation $ChocoCachePath  poshgit
-cup --cacheLocation $ChocoCachePath git-credential-manager-for-windows
+cup -y --cachelocation $ChocoCachePath  git
+cup -y --cachelocation $ChocoCachePath  poshgit
+cup -y --cacheLocation $ChocoCachePath git-credential-manager-for-windows
 # cinst sourcetree
-cinst --cachelocation $ChocoCachePath  winmerge
-cinst --cachelocation $ChocoCachePath  dottrace
-cinst --cachelocation $ChocoCachePath  visualstudiocode
-cinst --cachelocation $ChocoCachePath  prefix
-cinst --cachelocation $ChocoCachePath  nuget.commandline
-cinst --cachelocation $ChocoCachePath  nugetpackageexplorer
-cinst --cachelocation $ChocoCachePath  nodejs --version=12.22.1 --force -y
-cinst --cachelocation $ChocoCachePath  yarn
-cinst --cachelocation $ChocoCachePath  bitwarden
-cup --cacheLocation $ChocoCachePath postman
-cup --cacheLocation $ChocoCachePath openssl.light
+cup -y --cachelocation $ChocoCachePath  winmerge
+cup -y --cachelocation $ChocoCachePath  dottrace
+cup -y --cachelocation $ChocoCachePath  visualstudiocode
+cup -y --cachelocation $ChocoCachePath  prefix
+cup -y --cachelocation $ChocoCachePath  nuget.commandline
+cup -y --cachelocation $ChocoCachePath  nugetpackageexplorer
+cinst -y --cachelocation $ChocoCachePath  nodejs --version=12.22.1
+cup -y --cachelocation $ChocoCachePath  yarn
+cup -y --cachelocation $ChocoCachePath  bitwarden
+cup -y --cacheLocation $ChocoCachePath postman
+cup -y --cacheLocation $ChocoCachePath openssl.light
 
 ##############
 # PowerShell
 ##############
 
 # Installing Azure PowerShell modules
-Install-Module -Name AzureRM -Scope AllUsers
-Install-Module -Name Azure -Scope AllUsers -AllowClobber
+Install-Module -Name AzureRM -Scope AllUsers -Repository PSGallery -Force
+Install-Module -Name Azure -Scope AllUsers -Repository PSGallery -Force -AllowClobber
 
 
 #############################
@@ -127,25 +129,25 @@ Install-Module -Name Azure -Scope AllUsers -AllowClobber
 #############################
 
 # Ghostscript
-cup ghostscript --cacheLocation $ChocoCachePath
+cup -y --cacheLocation $ChocoCachePath ghostscript
 
 #Install Go
-cup golang --cacheLocation $ChocoCachePath
+cup -y --cacheLocation $ChocoCachePath golang
 
 # Install Java Runtime
-cup javaruntime --cacheLocation $ChocoCachePath
+cup -y --cacheLocation $ChocoCachePath javaruntime
 
 # Install JDK 8
-cup jdk8 --cacheLocation $ChocoCachePath
+cup -y --cacheLocation $ChocoCachePath jdk8
 
 # Install Python 2/3
-cup python2 --cacheLocation $ChocoCachePath
-cup python3 --cacheLocation $ChocoCachePath
+cup -y --cacheLocation $ChocoCachePath python2
+cup -y --cacheLocation $ChocoCachePath python3
 
 ###########################
 # vscode and associated
 ############################
-cinst --cachelocation $ChocoCachePath  vscode 
+cup -y --cachelocation $ChocoCachePath  vscode 
 choco pin add -n=vscode
 refreshenv
 code --install-extension apollographql.vscode-apollo
@@ -165,15 +167,15 @@ code --install-extension ms-vscode-remote.remote-wsl
 code --install-extension craigthomas.supersharp
 code --install-extension redhat.vscode-yaml
 code --install-extension octref.vetur
-choco install openinvscode
+cup -y --cachelocation $ChocoCachePath openinvscode
 # cinst python
 
 # Ops tools
-cinst --cachelocation $ChocoCachePath  sysinternals
-cinst --cachelocation $ChocoCachePath  mremoteng
+cup -y --cachelocation $ChocoCachePath  sysinternals
+cup -y --cachelocation $ChocoCachePath  mremoteng
 
 # K8s tools
-cinst --cachelocation $ChocoCachePath  lens
+cup -y --cachelocation $ChocoCachePath  lens
 
 # Web tools
 # cinst fiddler4
@@ -184,46 +186,46 @@ cinst --cachelocation $ChocoCachePath  lens
 ########
 
 # Install Azure cli
-cup  --cacheLocation $ChocoCachePath azure-cli
+cup -y --cacheLocation $ChocoCachePath azure-cli
 
 # Install azcopy
-cup  --cacheLocation $ChocoCachePathazcopy
+cup -y --cacheLocation $ChocoCachePathazcopy
 
 # Install Microsoft Azure Storage Explorer
-cup  --cacheLocation $ChocoCachePathmicrosoftazurestorageexplorer
+cup -y --cacheLocation $ChocoCachePathmicrosoftazurestorageexplorer
 
 # Install Microsoft Azure ServiceBus Explorer
-cup  --cacheLocation $ChocoCachePathservicebusexplorer
+cup -y --cacheLocation $ChocoCachePathservicebusexplorer
 
 
 # Communication
-cinst --cachelocation $ChocoCachePath  slack
-cinst --cachelocation $ChocoCachePath  microsoft-teams
+cup -y --cachelocation $ChocoCachePath  slack
+cup -y --cachelocation $ChocoCachePath  microsoft-teams
 
 # Office
-cinst --cachelocation $ChocoCachePath  -y office365business --params='/productId:"O365ProPlusRetail" /updates:"TRUE"'
+cup -y --cachelocation $ChocoCachePath  -y office365business --params='/productId:"O365ProPlusRetail" /updates:"TRUE"'
 
 # Databases
-cinst --cachelocation $ChocoCachePath  sql-server-express
-cinst --cachelocation $ChocoCachePath  sql-server-management-studio
-cinst --cachelocation $ChocoCachePath  microsoftazurestorageexplorer
-cinst --cachelocation $ChocoCachePath  azure-data-studio
-cinst --cachelocation $ChocoCachePath  azure-data-studio-sql-server-admin-pack
-cinst --cachelocation $ChocoCachePath  sqlsearch  # << package maybe not working
+cup -y --cachelocation $ChocoCachePath  sql-server-express
+cup -y --cachelocation $ChocoCachePath  sql-server-management-studio
+cup -y --cachelocation $ChocoCachePath  microsoftazurestorageexplorer
+cup -y --cachelocation $ChocoCachePath  azure-data-studio
+cup -y --cachelocation $ChocoCachePath  azure-data-studio-sql-server-admin-pack
+cup -y --cachelocation $ChocoCachePath  sqlsearch  # << package maybe not working
 
 #visual studio
-cinst --cachelocation $ChocoCachePath  visualstudio2019professional
-cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-manageddesktop
-cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-netcoretools 
-cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-netweb 
-cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-databuildtools
-cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-nodebuildtools
-cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-node
-cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-datascience
-cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-universalbuildtools
+cup -y --cachelocation $ChocoCachePath  visualstudio2019professional
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-manageddesktop
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-netcoretools 
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-netweb 
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-databuildtools
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-nodebuildtools
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-node
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-datascience
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-universalbuildtools
 
 # wsl
-cinst --cachelocation $ChocoCachePath  -y wsl2
+cup -y --cachelocation $ChocoCachePath  wsl2
 wsl --set-default-version 2
 if (-not (Get-AppxPackage CanonicalGroupLimited.Ubuntu20.04onWindows)) {
     Invoke-WebRequest -Uri https://aka.ms/wslubuntu2004 -OutFile Ubuntu.appx -UseBasicParsing
@@ -231,7 +233,7 @@ if (-not (Get-AppxPackage CanonicalGroupLimited.Ubuntu20.04onWindows)) {
 }
 
 # docker
-cinst --cachelocation $ChocoCachePath  -y docker-for-windows
+cup -y --cachelocation $ChocoCachePath  docker-for-windows
 
 # remove bad stuff
 
