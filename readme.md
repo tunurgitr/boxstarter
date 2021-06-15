@@ -1,0 +1,13 @@
+Admin command prompt
+```
+# install boxstarter from admin command prompt
+. { iwr -useb http://boxstarter.org/bootstrapper.ps1 } | iex; get-boxstarter -Force
+```
+
+
+
+Admin powershell
+```
+$creds = Get-Credential
+Install-BoxstarterPackage -PackageName https://gist.githubusercontent.com/tunurgitr/boxstarter/main/base.ps1, -Credential $cred
+```
