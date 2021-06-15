@@ -1,3 +1,4 @@
+# ref: https://gist.github.com/ghostinthewires/033276015ba9d58d1f162e7fd47cdbd3
 
 $Boxstarter.RebootOk=$true
 $Boxstarter.NoPassword=$false
@@ -17,6 +18,7 @@ if (Test-PendingReboot) { Invoke-Reboot }
 Enable-WindowsOptionalFeature -online -all -norestart -featurename Microsoft-Hyper-V-All
 Enable-WindowsOptionalFeature -Online -all -norestart -FeatureName Microsoft-Windows-Subsystem-Linux
 Enable-WindowsOptionalFeature -Online -all -norestart -FeatureName VirtualMachinePlatform
+cinst TelnetClient -source windowsFeatures
 
 if (Test-PendingReboot) { Invoke-Reboot }
 
@@ -65,6 +67,14 @@ Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds' -
 # Disable search toolbar
 Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search' -Name SearchTaskbarMode -Type DWORD -Value 0
 
+
+# Turn off People in Taskbar
+If (-Not (Test-Path "HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")) {
+    New-Item -Path HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People | Out-Null
+}
+Set-ItemProperty -Path "HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name PeopleBand -Type DWord -Value 0
+
+
 Disable-BingSearch
 Disable-GameBarTips
 
@@ -89,6 +99,7 @@ cinst --cachelocation $ChocoCachePath  chocolateygui
 # Dev tools
 cinst --cachelocation $ChocoCachePath  git
 cinst --cachelocation $ChocoCachePath  poshgit
+cup --cacheLocation $ChocoCachePath git-credential-manager-for-windows
 # cinst sourcetree
 cinst --cachelocation $ChocoCachePath  winmerge
 cinst --cachelocation $ChocoCachePath  dottrace
@@ -99,8 +110,38 @@ cinst --cachelocation $ChocoCachePath  nugetpackageexplorer
 cinst --cachelocation $ChocoCachePath  nodejs --version=12.22.1 --force -y
 cinst --cachelocation $ChocoCachePath  yarn
 cinst --cachelocation $ChocoCachePath  bitwarden
+cup --cacheLocation $ChocoCachePath postman
+cup --cacheLocation $ChocoCachePath openssl.light
 
+##############
+# PowerShell
+##############
+
+# Installing Azure PowerShell modules
+Install-Module -Name AzureRM -Scope AllUsers
+Install-Module -Name Azure -Scope AllUsers -AllowClobber
+
+
+#############################
+# Runtime Environments & SDKs
+#############################
+
+#Install Go
+cup golang --cacheLocation $ChocoCachePath
+
+# Install Java Runtime
+cup javaruntime --cacheLocation $ChocoCachePath
+
+# Install JDK 8
+cup jdk8 --cacheLocation $ChocoCachePath
+
+# Install Python 2/3
+cup python2 --cacheLocation $ChocoCachePath
+cup python3 --cacheLocation $ChocoCachePath
+
+###########################
 # vscode and associated
+############################
 cinst --cachelocation $ChocoCachePath  vscode 
 choco pin add -n=vscode
 refreshenv
@@ -133,6 +174,23 @@ cinst --cachelocation $ChocoCachePath  lens
 # Web tools
 # cinst fiddler4
 # cinst ngrok.portable
+
+########
+# Azure
+########
+
+# Install Azure cli
+cup  --cacheLocation $ChocoCachePath azure-cli
+
+# Install azcopy
+cup  --cacheLocation $ChocoCachePathazcopy
+
+# Install Microsoft Azure Storage Explorer
+cup  --cacheLocation $ChocoCachePathmicrosoftazurestorageexplorer
+
+# Install Microsoft Azure ServiceBus Explorer
+cup  --cacheLocation $ChocoCachePathservicebusexplorer
+
 
 # Communication
 cinst --cachelocation $ChocoCachePath  slack
@@ -192,5 +250,7 @@ Get-AppxPackage Microsoft.XboxTCUI | Remove-AppxPackage
 Get-AppxPackage Microsoft.YourPhone | Remove-AppxPackage
 Get-AppxPackage Microsoft.Zune* | Remove-AppxPackage
 Get-AppxPackage DellInc.PartnerPromo | Remove-AppxPackage
+Get-AppxPackage *Solitaire* | Remove-AppxPackage
+
 
 Invoke-Reboot
