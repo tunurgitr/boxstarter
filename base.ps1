@@ -189,13 +189,13 @@ cup -y --cachelocation $ChocoCachePath  lens
 cup -y --cacheLocation $ChocoCachePath azure-cli
 
 # Install azcopy
-cup -y --cacheLocation $ChocoCachePathazcopy
+cup -y --cacheLocation $ChocoCachePath azcopy
 
 # Install Microsoft Azure Storage Explorer
-cup -y --cacheLocation $ChocoCachePathmicrosoftazurestorageexplorer
+cup -y --cacheLocation $ChocoCachePath microsoftazurestorageexplorer
 
 # Install Microsoft Azure ServiceBus Explorer
-cup -y --cacheLocation $ChocoCachePathservicebusexplorer
+cup -y --cacheLocation $ChocoCachePath servicebusexplorer
 
 
 # Communication
