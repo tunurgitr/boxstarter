@@ -1,11 +1,3 @@
-# Steps: 
-# - Chocolatey (from admin command prompt)
-# @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-# - Boxstarter (from admin powershell prompt)
-# . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; get-boxstarter -Force
-# - Run this script
-# Install-BoxstarterPackage -PackageName (link to this raw gist)
-
 
 $Boxstarter.RebootOk=$true
 $Boxstarter.NoPassword=$false
@@ -19,8 +11,12 @@ if (Test-PendingReboot) { Invoke-Reboot }
 Install-WindowsUpdate -AcceptEula
 if (Test-PendingReboot) { Invoke-Reboot }
 
-Enable-WindowsOptionalFeature -online -featurename Microsoft-Hyper-V -All
+Enable-WindowsOptionalFeature -online -featurename Microsoft-Hyper-V-All
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+
 if (Test-PendingReboot) { Invoke-Reboot }
+lxrun /install /y
 
 # windows config
 
@@ -47,6 +43,7 @@ New-Item -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows' -Name 'Windows Search
 New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name AllowCortana -Type DWORD -Value 0
 
 Disable-BingSearch
+Disable-GameBarTips
 
 # Browsers
 cinst googlechrome
@@ -55,10 +52,10 @@ cinst firefox
 # Runtimes and SDKs
 cinst dotnet
 cinst dotnet-sdk
-cinst dotnetcore
-cinst dotnetcore-sdk
-cinst netfx-4.7.1-devpack
-
+cinst dotnetcore-3.1-runtime
+cinst dotnetcore-3.1-sdk
+cinst dotnetcore-2.1-runtime
+cinst dotnetcore-2.1-sdk
 
 # Utils
 cinst 7zip
@@ -83,8 +80,24 @@ cinst bitwarden
 # vscode and associated
 cinst vscode 
 choco pin add -n=vscode
-cinst vscode-gitlens
-choco install vscode-gitignore
+refreshenv
+code --install-extension apollographql.vscode-apollo
+code --install-extension ms-dotnettools.csharp
+code --install-extension jchannon.csharpextensions
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension eamodio.gitlens
+code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
+code --install-extension bierner.markdown-emoji
+code --install-extension bierner.markdown-mermaid
+code --install-extension tintoy.msbuild-project-tools
+code --install-extension ms-vscode.powershell
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-vscode-remote.remote-wsl
+code --install-extension craigthomas.supersharp
+code --install-extension redhat.vscode-yaml
+code --install-extension octref.vetur
+choco install openinvscode
 # cinst python
 
 # Ops tools
@@ -119,3 +132,7 @@ choco install visualstudio2019-workload-nodebuildtools
 choco install visualstudio2019-workload-node
 choco install visualstudio2019-workload-datascience
 choco install visualstudio2019-workload-universalbuildtools
+
+
+# docker
+choco install -y docker-for-windows

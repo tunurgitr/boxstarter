@@ -6,8 +6,8 @@ Admin command prompt
 
 
 
-Admin powershell
+From an admin powershell prompt
 ```
 $creds = Get-Credential
-Install-BoxstarterPackage -PackageName https://gist.githubusercontent.com/tunurgitr/boxstarter/main/base.ps1, -Credential $cred
+Install-BoxstarterPackage -PackageName https://gist.githubusercontent.com/tunurgitr/boxstarter/main/base.ps1 -Credential $cred
 ```
