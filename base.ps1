@@ -11,9 +11,9 @@ if (Test-PendingReboot) { Invoke-Reboot }
 Install-WindowsUpdate -AcceptEula
 if (Test-PendingReboot) { Invoke-Reboot }
 
-Enable-WindowsOptionalFeature -online -featurename Microsoft-Hyper-V-All /all /norestart
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux /all /norestart
-Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform /all /norestart
+Enable-WindowsOptionalFeature -online -all -norestart -featurename Microsoft-Hyper-V-All
+Enable-WindowsOptionalFeature -Online -all -norestart -FeatureName Microsoft-Windows-Subsystem-Linux
+Enable-WindowsOptionalFeature -Online -all -norestart -FeatureName VirtualMachinePlatform
 
 if (Test-PendingReboot) { Invoke-Reboot }
 
