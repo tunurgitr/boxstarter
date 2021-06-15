@@ -254,6 +254,3 @@ Get-AppxPackage Microsoft.YourPhone | Remove-AppxPackage
 Get-AppxPackage Microsoft.Zune* | Remove-AppxPackage
 Get-AppxPackage DellInc.PartnerPromo | Remove-AppxPackage
 Get-AppxPackage *Solitaire* | Remove-AppxPackage
-
-
-Invoke-Reboot
