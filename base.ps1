@@ -57,7 +57,7 @@ Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR"
 Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name GameDVR_Enabled -Type DWord -Value 0
 
 # Disable news and interests
-New-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds' -Name ShellFeedsTaskbarViewMode -Type DWORD -Value 2
+Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds' -Name ShellFeedsTaskbarViewMode -Type DWORD -Value 2
 
 Disable-BingSearch
 Disable-GameBarTips
@@ -150,10 +150,13 @@ cinst visualstudio2019-workload-node
 cinst visualstudio2019-workload-datascience
 cinst visualstudio2019-workload-universalbuildtools
 
-
+# wsl
+choco install -y wsl2
 wsl --set-default-version 2
-Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1604 -OutFile Ubuntu.appx -UseBasicParsing
-Add-AppxPackage .\Ubuntu.appx
+if (-not (Get-AppxPackage CanonicalGroupLimited.Ubuntu20.04onWindows)) {
+    Invoke-WebRequest -Uri https://aka.ms/wslubuntu2004 -OutFile Ubuntu.appx -UseBasicParsing
+    Add-AppxPackage .\Ubuntu.appx
+}
 
 # docker
 cinst -y docker-for-windows
@@ -165,3 +168,11 @@ Get-AppxPackage Microsoft.BingFinance | Remove-AppxPackage
 Get-AppxPackage Microsoft.BingNews | Remove-AppxPackage
 Get-AppxPackage Microsoft.BingSports | Remove-AppxPackage
 Get-AppxPackage Microsoft.BingWeather | Remove-AppxPackage
+
+# xbox garbage
+Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
+Get-AppxPackage Microsoft.GetHelp | Remove-AppxPackage
+Get-AppxPackage Microsoft.Xbox* | Remove-AppxPackage
+Get-AppxPackage Microsoft.YourPhone | Remove-AppxPackage
+Get-AppxPackage Microsoft.Zune* | Remove-AppxPackage
+Get-AppxPackage DellInc.PartnerPromo | Remove-AppxPackage
