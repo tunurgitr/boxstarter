@@ -3,6 +3,9 @@ $Boxstarter.RebootOk=$true
 $Boxstarter.NoPassword=$false
 $Boxstarter.AutoLogin=$true
 
+$ChocoCachePath = "c:\temp"
+New-Item -Path $ChocoCachePath -ItemType directory -Force
+
 Update-ExecutionPolicy Unrestricted
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableOpenFileExplorerToQuickAccess -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
 if (Test-PendingReboot) { Invoke-Reboot }
@@ -59,43 +62,46 @@ Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name GameDVR_Enabled -Typ
 # Disable news and interests
 Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds' -Name ShellFeedsTaskbarViewMode -Type DWORD -Value 2
 
+# Disable search toolbar
+Set-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search' -Name SearchTaskbarMode -Type DWORD -Value 0
+
 Disable-BingSearch
 Disable-GameBarTips
 
 # Browsers
-cinst googlechrome
-cinst firefox
+cinst --cachelocation $ChocoCachePath googlechrome
+cinst --cachelocation $ChocoCachePath  firefox
 
 # Runtimes and SDKs
-cinst dotnet
-cinst dotnet-sdk
-cinst dotnetcore-3.1-runtime
-cinst dotnetcore-3.1-sdk
-cinst dotnetcore-2.1-runtime
-cinst dotnetcore-2.1-sdk
+cinst --cachelocation $ChocoCachePath  dotnet
+cinst --cachelocation $ChocoCachePath  dotnet-sdk
+cinst --cachelocation $ChocoCachePath  dotnetcore-3.1-runtime
+cinst --cachelocation $ChocoCachePath  dotnetcore-3.1-sdk
+cinst --cachelocation $ChocoCachePath  dotnetcore-2.1-runtime
+cinst --cachelocation $ChocoCachePath  dotnetcore-2.1-sdk
 
 # Utils
-cinst 7zip
-cinst greenshot
-cinst chocolateygui
+cinst --cachelocation $ChocoCachePath  7zip
+cinst --cachelocation $ChocoCachePath  greenshot
+cinst --cachelocation $ChocoCachePath  chocolateygui
 # cinst keepass.install
 
 # Dev tools
-cinst git
-cinst poshgit
+cinst --cachelocation $ChocoCachePath  git
+cinst --cachelocation $ChocoCachePath  poshgit
 # cinst sourcetree
-cinst winmerge
-cinst dottrace
-cinst visualstudiocode
-cinst prefix
-cinst nuget.commandline
-cinst nugetpackageexplorer
-cinst nodejs-lts
-cinst yarn
-cinst bitwarden
+cinst --cachelocation $ChocoCachePath  winmerge
+cinst --cachelocation $ChocoCachePath  dottrace
+cinst --cachelocation $ChocoCachePath  visualstudiocode
+cinst --cachelocation $ChocoCachePath  prefix
+cinst --cachelocation $ChocoCachePath  nuget.commandline
+cinst --cachelocation $ChocoCachePath  nugetpackageexplorer
+cinst --cachelocation $ChocoCachePath  nodejs --version=12.22.1 --force -y
+cinst --cachelocation $ChocoCachePath  yarn
+cinst --cachelocation $ChocoCachePath  bitwarden
 
 # vscode and associated
-cinst vscode 
+cinst --cachelocation $ChocoCachePath  vscode 
 choco pin add -n=vscode
 refreshenv
 code --install-extension apollographql.vscode-apollo
@@ -118,40 +124,44 @@ choco install openinvscode
 # cinst python
 
 # Ops tools
-cinst sysinternals
-cinst mremoteng
+cinst --cachelocation $ChocoCachePath  sysinternals
+cinst --cachelocation $ChocoCachePath  mremoteng
 
 # K8s tools
-cinst lens
+cinst --cachelocation $ChocoCachePath  lens
 
 # Web tools
 # cinst fiddler4
 # cinst ngrok.portable
 
 # Communication
-cinst slack
-cinst microsoft-teams
+cinst --cachelocation $ChocoCachePath  slack
+cinst --cachelocation $ChocoCachePath  microsoft-teams
+
+# Office
+cinst --cachelocation $ChocoCachePath  -y office365business --params='/productId:"O365ProPlusRetail" /updates:"TRUE"'
 
 # Databases
-cinst sql-server-express
-cinst sql-server-management-studio
-cinst microsoftazurestorageexplorer
-cinst azure-data-studio
-cinst azure-data-studio-sql-server-admin-pack
-cinst sqlsearch  # << package maybe not working
+cinst --cachelocation $ChocoCachePath  sql-server-express
+cinst --cachelocation $ChocoCachePath  sql-server-management-studio
+cinst --cachelocation $ChocoCachePath  microsoftazurestorageexplorer
+cinst --cachelocation $ChocoCachePath  azure-data-studio
+cinst --cachelocation $ChocoCachePath  azure-data-studio-sql-server-admin-pack
+cinst --cachelocation $ChocoCachePath  sqlsearch  # << package maybe not working
 
-cinst visualstudio2019professional
-cinst visualstudio2019-workload-manageddesktop
-cinst visualstudio2019-workload-netcoretools 
-cinst visualstudio2019-workload-netweb 
-cinst visualstudio2019-workload-databuildtools
-cinst visualstudio2019-workload-nodebuildtools
-cinst visualstudio2019-workload-node
-cinst visualstudio2019-workload-datascience
-cinst visualstudio2019-workload-universalbuildtools
+#visual studio
+cinst --cachelocation $ChocoCachePath  visualstudio2019professional
+cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-manageddesktop
+cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-netcoretools 
+cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-netweb 
+cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-databuildtools
+cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-nodebuildtools
+cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-node
+cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-datascience
+cinst --cachelocation $ChocoCachePath  visualstudio2019-workload-universalbuildtools
 
 # wsl
-choco install -y wsl2
+cinst --cachelocation $ChocoCachePath  -y wsl2
 wsl --set-default-version 2
 if (-not (Get-AppxPackage CanonicalGroupLimited.Ubuntu20.04onWindows)) {
     Invoke-WebRequest -Uri https://aka.ms/wslubuntu2004 -OutFile Ubuntu.appx -UseBasicParsing
@@ -159,7 +169,7 @@ if (-not (Get-AppxPackage CanonicalGroupLimited.Ubuntu20.04onWindows)) {
 }
 
 # docker
-cinst -y docker-for-windows
+cinst --cachelocation $ChocoCachePath  -y docker-for-windows
 
 # remove bad stuff
 
@@ -168,11 +178,19 @@ Get-AppxPackage Microsoft.BingFinance | Remove-AppxPackage
 Get-AppxPackage Microsoft.BingNews | Remove-AppxPackage
 Get-AppxPackage Microsoft.BingSports | Remove-AppxPackage
 Get-AppxPackage Microsoft.BingWeather | Remove-AppxPackage
+Get-AppxPackage Microsoft.SkypeApp | Remove-AppxPackage
 
 # xbox garbage
 Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
 Get-AppxPackage Microsoft.GetHelp | Remove-AppxPackage
-Get-AppxPackage Microsoft.Xbox* | Remove-AppxPackage
+Get-AppxPackage Microsoft.XboxSpeechToTextOverlay | Remove-AppxPackage
+Get-AppxPackage Microsoft.XboxIdentityProvider | Remove-AppxPackage
+Get-AppxPackage Microsoft.XboxGamingOverlay | Remove-AppxPackage
+Get-AppxPackage Microsoft.XboxGameOverlay | Remove-AppxPackage
+Get-AppxPackage Microsoft.XboxApp | Remove-AppxPackage
+Get-AppxPackage Microsoft.XboxTCUI | Remove-AppxPackage
 Get-AppxPackage Microsoft.YourPhone | Remove-AppxPackage
 Get-AppxPackage Microsoft.Zune* | Remove-AppxPackage
 Get-AppxPackage DellInc.PartnerPromo | Remove-AppxPackage
+
+Invoke-Reboot
