@@ -7,7 +7,7 @@ $Boxstarter.AutoLogin=$true
 $ChocoCachePath = "c:\temp"
 New-Item -Path $ChocoCachePath -ItemType directory -Force
 
-Set-PSRepository 
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 
 Update-ExecutionPolicy Unrestricted
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableOpenFileExplorerToQuickAccess -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
