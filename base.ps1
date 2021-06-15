@@ -11,12 +11,11 @@ if (Test-PendingReboot) { Invoke-Reboot }
 Install-WindowsUpdate -AcceptEula
 if (Test-PendingReboot) { Invoke-Reboot }
 
-Enable-WindowsOptionalFeature -online -featurename Microsoft-Hyper-V-All
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+Enable-WindowsOptionalFeature -online -featurename Microsoft-Hyper-V-All /all /norestart
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux /all /norestart
+Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform /all /norestart
 
 if (Test-PendingReboot) { Invoke-Reboot }
-lxrun /install /y
 
 # windows config
 
@@ -36,7 +35,6 @@ Set-ItemProperty -Path HKLM:\Software\Microsoft\PolicyManager\default\WiFi\Allow
 Set-ItemProperty -Path HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots -Name value -Type DWord -Value 0
 
 # Start Menu: Disable Bing Search Results
-
 New-Item -Path 'HKLM:\SOFTWARE\Microsoft\Windows Search' -Name 'Windows Search' -ItemType Key
 New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name AllowCortana -Type DWORD -Value 0
 New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name BingSearchEnabled -Type DWORD -Value 0
@@ -58,6 +56,8 @@ Set-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" -Name AppCaptureEnabled -Type DWord -Value 0
 Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name GameDVR_Enabled -Type DWord -Value 0
 
+# Disable news and interests
+New-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds' -Name ShellFeedsTaskbarViewMode -Type DWORD -Value 2
 
 Disable-BingSearch
 Disable-GameBarTips
@@ -150,6 +150,10 @@ cinst visualstudio2019-workload-node
 cinst visualstudio2019-workload-datascience
 cinst visualstudio2019-workload-universalbuildtools
 
+
+wsl --set-default-version 2
+Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1604 -OutFile Ubuntu.appx -UseBasicParsing
+Add-AppxPackage .\Ubuntu.appx
 
 # docker
 cinst -y docker-for-windows
