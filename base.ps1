@@ -220,6 +220,9 @@ cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-nodebuildtools
 cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-node
 cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-datascience
 cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-universalbuildtools
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-nativedesktop
+cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-vctools
+cup -y --cachelocation $ChocoCachePath  vcredist140
 
 # wsl
 cup -y --cachelocation $ChocoCachePath  wsl2
