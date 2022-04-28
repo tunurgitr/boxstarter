@@ -94,7 +94,7 @@ cup -y --cachelocation $ChocoCachePath  dotnetcore-2.1-sdk
 
 # Utils
 cup -y --cachelocation $ChocoCachePath  7zip
-cup -y --cachelocation $ChocoCachePath  greenshot
+cup -y --cachelocation $ChocoCachePath  sharex
 cup -y --cachelocation $ChocoCachePath  chocolateygui
 # cinst keepass.install
 
@@ -109,7 +109,7 @@ cup -y --cachelocation $ChocoCachePath  visualstudiocode
 cup -y --cachelocation $ChocoCachePath  prefix
 cup -y --cachelocation $ChocoCachePath  nuget.commandline
 cup -y --cachelocation $ChocoCachePath  nugetpackageexplorer
-cinst -y --cachelocation $ChocoCachePath  nodejs --version=12.22.1
+cinst -y --cachelocation $ChocoCachePath  nodejs --version=14.19.0
 cup -y --cachelocation $ChocoCachePath  yarn
 cup -y --cachelocation $ChocoCachePath  bitwarden
 cup -y --cacheLocation $ChocoCachePath postman
@@ -208,21 +208,20 @@ cup -y --cachelocation $ChocoCachePath  sql-server-management-studio
 cup -y --cachelocation $ChocoCachePath  microsoftazurestorageexplorer
 cup -y --cachelocation $ChocoCachePath  azure-data-studio
 cup -y --cachelocation $ChocoCachePath  azure-data-studio-sql-server-admin-pack
-cup -y --cachelocation $ChocoCachePath  sqlsearch  # << package maybe not working
 
 #visual studio
-cup -y --cachelocation $ChocoCachePath  visualstudio2019professional
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-manageddesktop
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-netcoretools 
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-netweb 
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-databuildtools
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-nodebuildtools
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-node
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-datascience
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-universalbuildtools
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-nativedesktop
-cup -y --cachelocation $ChocoCachePath  visualstudio2019-workload-vctools
-cup -y --cachelocation $ChocoCachePath  vcredist140
+cup -y --cachelocation $ChocoCachePath  visualstudio2022professional
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-azure
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-azurebuildtools
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-data
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-databuildtools
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-nativecrossplat
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-nativemobile
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-netcrossplat
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-netweb
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-node
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-python
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-webbuild
 
 # wsl
 cup -y --cachelocation $ChocoCachePath  wsl2
