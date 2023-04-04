@@ -82,11 +82,15 @@ Disable-GameBarTips
 
 # Browsers
 cup -y --cachelocation $ChocoCachePath googlechrome
-cup -y --cachelocation $ChocoCachePath  firefox
+cup -y --cachelocation $ChocoCachePath firefox
 
 # Runtimes and SDKs
 cup -y --cachelocation $ChocoCachePath  dotnet
 cup -y --cachelocation $ChocoCachePath  dotnet-sdk
+cup -y --cachelocation $ChocoCachePath  dotnet-6.0-sdk-2xx
+cup -y --cachelocation $ChocoCachePath  dotnet-6.0-runtime-2xx
+cup -y --cachelocation $ChocoCachePath  dotnet-5.0-sdk-3xx
+cup -y --cachelocation $ChocoCachePath  dotnet-5.0-runtime-3xx
 cup -y --cachelocation $ChocoCachePath  dotnetcore-3.1-runtime
 cup -y --cachelocation $ChocoCachePath  dotnetcore-3.1-sdk
 cup -y --cachelocation $ChocoCachePath  dotnetcore-2.1-runtime
@@ -99,19 +103,20 @@ cup -y --cachelocation $ChocoCachePath  chocolateygui
 # cinst keepass.install
 
 # Dev tools
-cup -y --cachelocation $ChocoCachePath  git
-cup -y --cachelocation $ChocoCachePath  poshgit
+cup -y --cachelocation $ChocoCachePath git
+cup -y --cachelocation $ChocoCachePath poshgit
 cup -y --cacheLocation $ChocoCachePath git-credential-manager-for-windows
 # cinst sourcetree
-cup -y --cachelocation $ChocoCachePath  winmerge
-cup -y --cachelocation $ChocoCachePath  dottrace
-cup -y --cachelocation $ChocoCachePath  visualstudiocode
-cup -y --cachelocation $ChocoCachePath  prefix
-cup -y --cachelocation $ChocoCachePath  nuget.commandline
-cup -y --cachelocation $ChocoCachePath  nugetpackageexplorer
-cinst -y --cachelocation $ChocoCachePath  nodejs --version=14.19.0
-cup -y --cachelocation $ChocoCachePath  yarn
-cup -y --cachelocation $ChocoCachePath  bitwarden
+cup -y --cachelocation $ChocoCachePath winmerge
+cup -y --cachelocation $ChocoCachePath dottrace
+cup -y --cachelocation $ChocoCachePath visualstudiocode
+cup -y --cachelocation $ChocoCachePath prefix
+cup -y --cachelocation $ChocoCachePath nuget.commandline
+cup -y --cachelocation $ChocoCachePath nugetpackageexplorer
+cup -y --cachelocation $ChocoCachePath nodejs --version=14.21.3
+cup -y --cachelocation $ChocoCachePath nodejs --version=16.20.0
+cup -y --cachelocation $ChocoCachePath yarn
+cup -y --cachelocation $ChocoCachePath bitwarden
 cup -y --cacheLocation $ChocoCachePath postman
 cup -y --cacheLocation $ChocoCachePath openssl.light
 
@@ -135,7 +140,7 @@ cup -y --cacheLocation $ChocoCachePath ghostscript
 cup -y --cacheLocation $ChocoCachePath golang
 
 # Install Java Runtime
-cup -y --cacheLocation $ChocoCachePath javaruntime
+cup -y --cacheLocation $ChocoCachePath openjdk
 
 # Install Python 2/3
 cup -y --cacheLocation $ChocoCachePath python2
@@ -168,11 +173,11 @@ cup -y --cachelocation $ChocoCachePath openinvscode
 # cinst python
 
 # Ops tools
-cup -y --cachelocation $ChocoCachePath  sysinternals
-cup -y --cachelocation $ChocoCachePath  mremoteng
+cup -y --cachelocation $ChocoCachePath sysinternals
+cup -y --cachelocation $ChocoCachePath mremoteng
 
 # K8s tools
-cup -y --cachelocation $ChocoCachePath  lens
+cup -y --cachelocation $ChocoCachePath lens
 
 # Web tools
 # cinst fiddler4
@@ -196,8 +201,8 @@ cup -y --cacheLocation $ChocoCachePath servicebusexplorer
 
 
 # Communication
-cup -y --cachelocation $ChocoCachePath  slack
-cup -y --cachelocation $ChocoCachePath  microsoft-teams
+cup -y --cachelocation $ChocoCachePath slack
+cup -y --cachelocation $ChocoCachePath microsoft-teams
 
 # Office
 cup -y --cachelocation $ChocoCachePath  -y office365business --params='/productId:"O365ProPlusRetail" /updates:"TRUE"'
