@@ -87,10 +87,10 @@ cup -y --cachelocation $ChocoCachePath firefox
 # Runtimes and SDKs
 cup -y --cachelocation $ChocoCachePath  dotnet
 cup -y --cachelocation $ChocoCachePath  dotnet-sdk
-cup -y --cachelocation $ChocoCachePath  dotnet-6.0-sdk-2xx
-cup -y --cachelocation $ChocoCachePath  dotnet-6.0-runtime-2xx
-cup -y --cachelocation $ChocoCachePath  dotnet-5.0-sdk-3xx
-cup -y --cachelocation $ChocoCachePath  dotnet-5.0-runtime-3xx
+cup -y --cachelocation $ChocoCachePath  dotnet-6.0-sdk
+cup -y --cachelocation $ChocoCachePath  dotnet-6.0-runtime
+cup -y --cachelocation $ChocoCachePath  dotnet-5.0-sdk
+cup -y --cachelocation $ChocoCachePath  dotnet-5.0-runtime
 cup -y --cachelocation $ChocoCachePath  dotnetcore-3.1-runtime
 cup -y --cachelocation $ChocoCachePath  dotnetcore-3.1-sdk
 cup -y --cachelocation $ChocoCachePath  dotnetcore-2.1-runtime
@@ -169,6 +169,16 @@ code --install-extension ms-vscode-remote.remote-wsl
 code --install-extension craigthomas.supersharp
 code --install-extension redhat.vscode-yaml
 code --install-extension octref.vetur
+code --install-extension ms-python.python
+code --install-extension ms-toolsai.jupyter
+code --install-extension ms-toolsai.vscode-jupyter-slideshow
+code --install-extension visualstudioexptteam.vscodeintellicode
+
+
+# copilot
+code --install-extension github.copilot
+code --install-extension github.copilot-labs
+
 cup -y --cachelocation $ChocoCachePath openinvscode
 # cinst python
 
@@ -216,17 +226,23 @@ cup -y --cachelocation $ChocoCachePath  azure-data-studio-sql-server-admin-pack
 
 #visual studio
 cup -y --cachelocation $ChocoCachePath  visualstudio2022professional
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-data
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-netweb
+cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-webbuild
 cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-azure
 cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-azurebuildtools
-cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-data
 cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-databuildtools
 cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-nativecrossplat
 cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-nativemobile
 cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-netcrossplat
-cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-netweb
 cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-node
 cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-python
-cup -y --cachelocation $ChocoCachePath  visualstudio2022-workload-webbuild
+
+# jetbrains
+cup -y --cachelocation $ChocoCachePath  jetbrains-rider
+cup -y --cachelocation $ChocoCachePath  resharper-platform
+
+cup -y --cachelocation $ChocoCachePath  obsidian
 
 # wsl
 cup -y --cachelocation $ChocoCachePath  wsl2
